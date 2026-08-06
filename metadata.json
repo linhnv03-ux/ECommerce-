@@ -1,0 +1,6 @@
+{
+  "name": "XStore ECommerce - Store Marseille04",
+  "description": "Full-featured E-Commerce online store with product catalog, cart, checkout, interactive filtering, wishlist, quick view, search, and user account management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,223 @@
+@use '@styles/_variable.module.scss' as *;
+@use '@styles/_mixin.module.scss' as *;
+
+.footerContainer {
+  background-color: $bg_dark;
+  color: #d6d3d1;
+  padding-top: 64px;
+  padding-bottom: 32px;
+  border-top: 1px solid #1c1917;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.newsletter {
+  background: linear-gradient(to right, #1c1917, rgba(28, 25, 23, 0.9));
+  border: 1px solid #292524;
+  padding: 32px;
+  border-radius: 24px;
+  @include flex_box_custom(space-between, center, 32px);
+  margin-bottom: 48px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 22px;
+    font-weight: 700;
+    color: $white_color;
+  }
+
+  .desc {
+    font-size: 13px;
+    color: #a8a29e;
+    margin-top: 4px;
+  }
+
+  .successMsg {
+    @include flex_box_custom(center, center, 8px);
+    background-color: rgba(6, 78, 59, 0.6);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    padding: 12px 20px;
+    border-radius: 16px;
+    color: #34d399;
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  .subForm {
+    @include flex_box_custom(center, center, 8px);
+    width: 100%;
+
+    @media (min-width: 768px) {
+      width: auto;
+    }
+
+    .emailInput {
+      width: 100%;
+      background-color: #292524;
+      border: 1px solid #44403c;
+      border-radius: 16px;
+      padding: 12px 16px;
+      font-size: 12px;
+      color: $white_color;
+      outline: none;
+
+      &:focus {
+        border-color: $secondary_color;
+      }
+
+      @media (min-width: 768px) {
+        width: 280px;
+      }
+    }
+
+    .subBtn {
+      @include flex_box_custom(center, center, 8px);
+      padding: 12px 24px;
+      background-color: $secondary_color;
+      color: $primary_color;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 16px;
+      border: none;
+      cursor: pointer;
+      flex-shrink: 0;
+
+      &:hover {
+        background-color: #fbbf24;
+      }
+    }
+  }
+}
+
+.linksGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 32px;
+  font-size: 12px;
+  margin-bottom: 48px;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .colBrand {
+    grid-column: span 4;
+
+    @media (max-width: 1024px) {
+      grid-column: span 1;
+    }
+
+    .brandTitleRow {
+      @include flex_box_custom(flex-start, center, 8px);
+      margin-bottom: 12px;
+
+      .brandTitle {
+        font-size: 24px;
+        font-weight: 700;
+        color: $white_color;
+      }
+
+      .brandSub {
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: $secondary_color;
+        font-weight: 600;
+      }
+    }
+
+    .brandDesc {
+      color: #a8a29e;
+      line-height: 1.6;
+      max-width: 380px;
+    }
+  }
+
+  .colGroup {
+    grid-column: span 3;
+
+    @media (max-width: 1024px) {
+      grid-column: span 1;
+    }
+
+    &.colGroupSmall {
+      grid-column: span 2;
+
+      @media (max-width: 1024px) {
+        grid-column: span 1;
+      }
+    }
+
+    .colHeader {
+      font-size: 13px;
+      font-weight: 700;
+      color: $white_color;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .linkList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      .linkItem {
+        margin-bottom: 8px;
+
+        .linkBtn {
+          background: transparent;
+          border: none;
+          color: #a8a29e;
+          font-size: 12px;
+          cursor: pointer;
+          padding: 0;
+
+          &:hover {
+            color: $secondary_color;
+          }
+        }
+      }
+    }
+
+    .contactList {
+      color: #a8a29e;
+      line-height: 1.8;
+    }
+  }
+}
+
+.bottomRow {
+  padding-top: 32px;
+  border-top: 1px solid #1c1917;
+  @include flex_box_custom(space-between, center, 16px);
+  font-size: 12px;
+  color: #78716c;
+  flex-wrap: wrap;
+
+  .paymentBadges {
+    @include flex_box_custom(flex-end, center, 8px);
+
+    .payBadge {
+      padding: 4px 8px;
+      border-radius: 4px;
+      background-color: #1c1917;
+      border: 1px solid #292524;
+      font-size: 10px;
+      font-weight: 700;
+      color: #a8a29e;
+    }
+  }
+}

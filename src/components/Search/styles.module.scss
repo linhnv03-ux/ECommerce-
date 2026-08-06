@@ -1,0 +1,203 @@
+@use '@styles/_variable.module.scss' as *;
+@use '@styles/_mixin.module.scss' as *;
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  @include flex_box_custom(center, flex-start, 0px);
+  padding-top: 64px;
+  padding-left: 16px;
+  padding-right: 16px;
+  background-color: rgba(12, 10, 9, 0.7);
+  backdrop-filter: blur(8px);
+  overflow-y: auto;
+}
+
+.searchCard {
+  position: relative;
+  background-color: $white_color;
+  width: 100%;
+  max-width: 672px;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  border: 1px solid $border_color;
+  padding: 24px;
+}
+
+.inputWrapper {
+  position: relative;
+  @include flex_box_custom(flex-start, center, 0px);
+  margin-bottom: 24px;
+
+  .searchIcon {
+    position: absolute;
+    left: 16px;
+    width: 20px;
+    height: 20px;
+    color: #a8a29e;
+  }
+
+  .searchInput {
+    width: 100%;
+    padding-left: 48px;
+    padding-right: 48px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    background-color: #f5f5f4;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    font-size: 14px;
+    color: $primary_color;
+    outline: none;
+
+    &:focus {
+      border-color: $secondary_color;
+    }
+  }
+
+  .closeBtn {
+    position: absolute;
+    right: 12px;
+    padding: 6px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: #a8a29e;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary_color;
+    }
+  }
+}
+
+.popularBox {
+  .trendHeader {
+    @include flex_box_custom(flex-start, center, 8px);
+    font-size: 12px;
+    font-weight: 600;
+    color: #a8a29e;
+    margin-bottom: 12px;
+
+    .trendIcon {
+      width: 14px;
+      height: 14px;
+      color: $secondary_color;
+    }
+  }
+
+  .kwGroup {
+    @include flex_box_custom(flex-start, center, 8px);
+    flex-wrap: wrap;
+
+    .kwBtn {
+      padding: 6px 14px;
+      border-radius: 8px;
+      background-color: #f5f5f4;
+      font-size: 12px;
+      font-weight: 500;
+      color: #44403c;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $secondary_color;
+        color: $primary_color;
+      }
+    }
+  }
+}
+
+.resultBox {
+  .resultHeader {
+    @include flex_box_custom(space-between, center, 0px);
+    font-size: 12px;
+    font-weight: 600;
+    color: #78716c;
+    margin-bottom: 12px;
+  }
+
+  .noResults {
+    font-size: 14px;
+    color: #a8a29e;
+    text-align: center;
+    padding: 32px 0;
+  }
+
+  .resultList {
+    @include flex_box_custom(flex-start, stretch, 12px);
+    flex-direction: column;
+    max-height: 384px;
+    overflow-y: auto;
+    padding-right: 4px;
+
+    .resultItem {
+      @include flex_box_custom(flex-start, center, 16px);
+      padding: 12px;
+      border-radius: 12px;
+      background-color: #fafaf9;
+      border: 1px solid $border_color;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #fffbeb;
+
+        .itemTitle, .arrowIcon {
+          color: $secondary_color;
+        }
+
+        .arrowIcon {
+          transform: translateX(4px);
+        }
+      }
+
+      .itemImg {
+        width: 56px;
+        height: 56px;
+        border-radius: 8px;
+        object-fit: cover;
+        background-color: $white_color;
+        flex-shrink: 0;
+      }
+
+      .itemMeta {
+        flex: 1;
+        min-width: 0;
+
+        .itemCat {
+          font-size: 10px;
+          font-weight: 800;
+          text-transform: uppercase;
+          color: $secondary_color;
+          display: block;
+        }
+
+        .itemTitle {
+          font-size: 12px;
+          font-weight: 700;
+          color: $primary_color;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .itemPrice {
+          font-size: 12px;
+          font-weight: 800;
+          color: $primary_color;
+          margin-top: 2px;
+          display: block;
+        }
+      }
+
+      .arrowIcon {
+        width: 16px;
+        height: 16px;
+        color: #a8a29e;
+        transition: all 0.2s ease;
+      }
+    }
+  }
+}

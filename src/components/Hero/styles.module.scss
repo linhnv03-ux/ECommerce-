@@ -1,0 +1,156 @@
+@use '@styles/_variable.module.scss' as *;
+@use '@styles/_mixin.module.scss' as *;
+
+.heroSection {
+  position: relative;
+  overflow: hidden;
+  background-color: $bg_dark;
+  color: $white_color;
+  min-height: 520px;
+  @include flex_box_custom(flex-start, center, 0px);
+
+  @media (min-width: 768px) {
+    min-height: 600px;
+  }
+}
+
+.heroBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.65;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #0c0a09, rgba(12, 10, 9, 0.8), transparent);
+  }
+}
+
+.heroContent {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 64px 32px;
+  width: 100%;
+
+  .contentContainer {
+    max-width: 672px;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background-color: rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fcd34d;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+
+  .sparkleIcon {
+    width: 14px;
+    height: 14px;
+    color: #fbbf24;
+  }
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  color: $white_color;
+  line-height: 1.15;
+  margin-bottom: 16px;
+
+  @media (min-width: 640px) {
+    font-size: 52px;
+  }
+}
+
+.subtitle {
+  font-size: 20px;
+  font-weight: 500;
+  color: #fef3c7;
+  margin-bottom: 12px;
+}
+
+.description {
+  font-size: 15px;
+  color: #d6d3d1;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  max-width: 580px;
+}
+
+.ctaGroup {
+  @include flex_box_custom(flex-start, center, 16px);
+  flex-wrap: wrap;
+
+  .btnPrimary {
+    @include flex_box_custom(center, center, 10px);
+    padding: 14px 28px;
+    border-radius: 9999px;
+    background-color: $secondary_color;
+    color: $primary_color;
+    font-weight: 700;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+
+    &:hover {
+      background-color: #fbbf24;
+      transform: translateY(-2px);
+    }
+  }
+
+  .btnSecondary {
+    @include flex_box_custom(center, center, 8px);
+    padding: 14px 24px;
+    border-radius: 9999px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: $white_color;
+    font-weight: 600;
+    font-size: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+.guaranteeBar {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #292524;
+  @include flex_box_custom(flex-start, center, 24px);
+  font-size: 12px;
+  color: #d6d3d1;
+
+  .guaranteeItem {
+    @include flex_box_custom(flex-start, center, 8px);
+
+    .guaranteeIcon {
+      width: 16px;
+      height: 16px;
+      color: #fbbf24;
+    }
+  }
+}

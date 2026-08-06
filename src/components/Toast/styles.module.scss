@@ -1,0 +1,96 @@
+@use '@styles/_variable.module.scss' as *;
+@use '@styles/_mixin.module.scss' as *;
+
+.toastBox {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 50;
+  @include flex_box_custom(flex-start, stretch, 8px);
+  flex-direction: column;
+  max-width: 384px;
+  width: 100%;
+  padding: 0 16px;
+  pointer-events: none;
+}
+
+.toastCard {
+  pointer-events: auto;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid $border_color;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  @include flex_box_custom(flex-start, center, 12px);
+  position: relative;
+  overflow: hidden;
+
+  .toastImg {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid $border_color;
+    flex-shrink: 0;
+  }
+
+  .toastIconBox {
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #ecfdf5;
+    color: #059669;
+    flex-shrink: 0;
+
+    .iconWarning {
+      color: $secondary_color;
+    }
+
+    .iconInfo {
+      color: #0284c7;
+    }
+
+    .iconSuccess {
+      color: #059669;
+    }
+  }
+
+  .toastContent {
+    flex: 1;
+    min-width: 0;
+    padding-right: 16px;
+
+    .toastTitle {
+      font-size: 14px;
+      font-weight: 600;
+      color: $primary_color;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .toastDesc {
+      font-size: 12px;
+      color: #78716c;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 2px;
+    }
+  }
+
+  .closeToastBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px;
+    border: none;
+    background: transparent;
+    color: #a8a29e;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary_color;
+    }
+  }
+}

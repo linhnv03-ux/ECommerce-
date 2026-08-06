@@ -1,0 +1,6 @@
+@mixin flex_box_custom($justify: center, $align: center, $gap: 0px) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}

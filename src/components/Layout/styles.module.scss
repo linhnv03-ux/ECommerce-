@@ -1,0 +1,15 @@
+@use '@styles/_variable.module.scss' as *;
+@use '@styles/_mixin.module.scss' as *;
+
+.layoutWrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #fafaf9;
+  color: $text_dark;
+}
+
+.mainContent {
+  flex: 1;
+  width: 100%;
+}

@@ -1,0 +1,454 @@
+@use '@styles/_variable.module.scss' as *;
+@use '@styles/_mixin.module.scss' as *;
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  @include flex_box_custom(center, center, 0px);
+  padding: 16px;
+  background-color: rgba(12, 10, 9, 0.7);
+  backdrop-filter: blur(6px);
+  overflow-y: auto;
+}
+
+.checkoutCard {
+  position: relative;
+  background-color: $white_color;
+  width: 100%;
+  max-width: 896px;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  border: 1px solid $border_color;
+  padding: 24px;
+  margin: 32px 0;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  @media (min-width: 768px) {
+    padding: 32px;
+  }
+}
+
+.checkoutHeader {
+  @include flex_box_custom(space-between, center, 0px);
+  padding-bottom: 16px;
+  border-bottom: 1px solid $border_color;
+  margin-bottom: 24px;
+
+  .headerTitle {
+    @include flex_box_custom(flex-start, center, 8px);
+    font-size: 20px;
+    font-weight: 700;
+    color: $primary_color;
+
+    .shieldIcon {
+      width: 24px;
+      height: 24px;
+      color: #10b981;
+    }
+  }
+
+  .closeBtn {
+    padding: 6px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: #a8a29e;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f5f5f4;
+      color: $primary_color;
+    }
+  }
+}
+
+.checkoutGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 32px;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .leftCol {
+    grid-column: span 7;
+
+    @media (max-width: 1024px) {
+      grid-column: span 1;
+    }
+
+    .stepSection {
+      margin-bottom: 24px;
+
+      .stepTitle {
+        font-weight: 700;
+        font-size: 14px;
+        color: $primary_color;
+        margin-bottom: 16px;
+        @include flex_box_custom(flex-start, center, 8px);
+
+        .stepNum {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background-color: $secondary_color;
+          color: $primary_color;
+          font-size: 12px;
+          font-weight: 800;
+          @include flex_box_custom(center, center, 0px);
+        }
+      }
+
+      .formGrid {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 16px;
+        font-size: 12px;
+
+        @media (min-width: 640px) {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .fullWidth {
+          grid-column: span 1;
+
+          @media (min-width: 640px) {
+            grid-column: span 2;
+          }
+        }
+
+        .fieldGroup {
+          label {
+            display: block;
+            color: #57534e;
+            font-weight: 600;
+            margin-bottom: 4px;
+          }
+
+          input, textarea {
+            width: 100%;
+            background-color: #fafaf9;
+            border: 1px solid $border_color;
+            border-radius: 12px;
+            padding: 10px 12px;
+            font-weight: 500;
+
+            &:focus {
+              border-color: $secondary_color;
+              outline: none;
+            }
+          }
+        }
+      }
+
+      .paymentMethods {
+        @include flex_box_custom(flex-start, stretch, 10px);
+        flex-direction: column;
+        font-size: 12px;
+        font-weight: 600;
+
+        .payCard {
+          @include flex_box_custom(flex-start, center, 12px);
+          padding: 14px;
+          border-radius: 12px;
+          border: 1px solid $border_color;
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &.active {
+            border-color: $secondary_color;
+            background-color: rgba(245, 158, 11, 0.1);
+            color: $primary_color;
+          }
+
+          .payTitle {
+            font-weight: 700;
+          }
+
+          .payDesc {
+            font-size: 11px;
+            font-weight: 400;
+            color: #78716c;
+          }
+        }
+      }
+    }
+  }
+
+  .rightCol {
+    grid-column: span 5;
+    background-color: #fafaf9;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid $border_color;
+    @include flex_box_custom(space-between, stretch, 16px);
+    flex-direction: column;
+
+    @media (max-width: 1024px) {
+      grid-column: span 1;
+    }
+
+    .summaryTitle {
+      font-weight: 700;
+      font-size: 14px;
+      color: $primary_color;
+      padding-bottom: 12px;
+      border-bottom: 1px solid $border_color;
+    }
+
+    .summaryItems {
+      max-height: 240px;
+      overflow-y: auto;
+      @include flex_box_custom(flex-start, stretch, 12px);
+      flex-direction: column;
+      margin: 12px 0;
+
+      .summaryItem {
+        @include flex_box_custom(flex-start, center, 12px);
+        font-size: 12px;
+
+        .itemImg {
+          width: 48px;
+          height: 48px;
+          border-radius: 8px;
+          object-fit: cover;
+          border: 1px solid $border_color;
+          flex-shrink: 0;
+        }
+
+        .itemMeta {
+          flex: 1;
+          min-width: 0;
+
+          .itemTitle {
+            font-weight: 600;
+            color: #292524;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .itemQty {
+            color: #a8a29e;
+          }
+        }
+
+        .itemPrice {
+          font-weight: 700;
+          color: $primary_color;
+        }
+      }
+    }
+
+    .summaryBreakdown {
+      font-size: 12px;
+      color: #57534e;
+      padding-top: 12px;
+      border-top: 1px solid $border_color;
+      @include flex_box_custom(flex-start, stretch, 8px);
+      flex-direction: column;
+
+      .row {
+        @include flex_box_custom(space-between, center, 0px);
+      }
+
+      .totalRow {
+        @include flex_box_custom(space-between, center, 0px);
+        font-size: 16px;
+        font-weight: 800;
+        color: $primary_color;
+        padding-top: 12px;
+        border-top: 1px solid $border_color;
+
+        .totalPrice {
+          color: $secondary_color;
+        }
+      }
+    }
+
+    .submitBox {
+      @include flex_box_custom(flex-start, stretch, 12px);
+      flex-direction: column;
+
+      .sslNote {
+        @include flex_box_custom(center, center, 6px);
+        font-size: 11px;
+        color: #a8a29e;
+      }
+
+      .placeOrderBtn {
+        width: 100%;
+        background-color: $secondary_color;
+        color: $primary_color;
+        padding: 14px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        @include flex_box_custom(center, center, 8px);
+        box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.3);
+
+        &:hover {
+          background-color: #fbbf24;
+        }
+      }
+    }
+  }
+}
+
+/* Order Success Page Styles */
+.successPageWrapper {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 48px 16px;
+}
+
+.successCard {
+  background-color: $white_color;
+  border: 1px solid $border_color;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  .checkIconBox {
+    width: 72px;
+    height: 72px;
+    background-color: #d1fae5;
+    color: #059669;
+    border-radius: 50%;
+    @include flex_box_custom(center, center, 0px);
+    margin: 0 auto 24px auto;
+  }
+
+  .successTitle {
+    font-size: 28px;
+    font-weight: 700;
+    color: $primary_color;
+  }
+
+  .successSub {
+    font-size: 13px;
+    color: #78716c;
+    margin-top: 8px;
+  }
+
+  .orderDetailCard {
+    background-color: #fafaf9;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid $border_color;
+    text-align: left;
+    font-size: 12px;
+    margin: 24px 0;
+
+    .detailHead {
+      @include flex_box_custom(space-between, center, 8px);
+      padding-bottom: 12px;
+      border-bottom: 1px solid $border_color;
+      margin-bottom: 16px;
+
+      .label {
+        color: #a8a29e;
+        font-size: 10px;
+        text-transform: uppercase;
+        display: block;
+      }
+
+      .value {
+        font-weight: 700;
+        color: #292524;
+      }
+
+      .badge {
+        padding: 2px 10px;
+        border-radius: 9999px;
+        background-color: #fef3c7;
+        color: #92400e;
+        font-size: 10px;
+        font-weight: 700;
+      }
+    }
+
+    .addressSection {
+      margin-bottom: 16px;
+
+      .addrTitle {
+        @include flex_box_custom(flex-start, center, 6px);
+        font-weight: 700;
+        color: #292524;
+      }
+
+      .addrText {
+        color: #57534e;
+        padding-left: 22px;
+        margin-top: 4px;
+      }
+    }
+
+    .itemsSection {
+      .itemsTitle {
+        font-weight: 700;
+        color: #292524;
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      .itemRow {
+        @include flex_box_custom(space-between, center, 0px);
+        margin-bottom: 6px;
+
+        .name {
+          color: #44403c;
+        }
+
+        .price {
+          font-weight: 700;
+          color: $primary_color;
+        }
+      }
+    }
+  }
+
+  .btnGroup {
+    @include flex_box_custom(center, center, 16px);
+    flex-wrap: wrap;
+
+    .shopBtn {
+      @include flex_box_custom(center, center, 8px);
+      padding: 12px 24px;
+      border-radius: 12px;
+      background-color: $secondary_color;
+      color: $primary_color;
+      font-weight: 700;
+      font-size: 12px;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #fbbf24;
+      }
+    }
+
+    .accountBtn {
+      @include flex_box_custom(center, center, 8px);
+      padding: 12px 24px;
+      border-radius: 12px;
+      background-color: #f5f5f4;
+      color: #292524;
+      font-weight: 700;
+      font-size: 12px;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #e7e5e4;
+      }
+    }
+  }
+}

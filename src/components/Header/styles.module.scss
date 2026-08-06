@@ -1,0 +1,287 @@
+@use '@styles/_variable.module.scss' as *;
+@use '@styles/_mixin.module.scss' as *;
+
+.headerWrapper {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(231, 229, 228, 0.8);
+}
+
+.topBar {
+  background-color: $bg_dark;
+  color: #e7e5e4;
+  font-size: 12px;
+  padding: 8px 32px;
+
+  .topInner {
+    max-width: 1280px;
+    margin: 0 auto;
+    @include flex_box_custom(space-between, center, 8px);
+
+    @media (max-width: 640px) {
+      flex-direction: column;
+    }
+  }
+
+  .contactGroup {
+    @include flex_box_custom(flex-start, center, 16px);
+
+    .contactItem {
+      @include flex_box_custom(flex-start, center, 6px);
+      
+      .phoneIcon, .mailIcon {
+        width: 14px;
+        height: 14px;
+        color: $secondary_color;
+      }
+    }
+
+    .hideMobile {
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+  }
+
+  .announcement {
+    color: $secondary_color;
+    font-weight: 500;
+  }
+
+  .rightOptions {
+    @include flex_box_custom(flex-end, center, 12px);
+
+    .optionBtn {
+      @include flex_box_custom(center, center, 4px);
+      background-color: #292524;
+      color: #e7e5e4;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: #fcd34d;
+      }
+    }
+  }
+}
+
+.mainHeader {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  @include flex_box_custom(space-between, center, 16px);
+}
+
+.leftSection {
+  @include flex_box_custom(flex-start, center, 24px);
+
+  .mobileToggle {
+    display: none;
+    background: transparent;
+    border: none;
+    padding: 8px;
+    color: $text_dark;
+    cursor: pointer;
+
+    @media (max-width: 1024px) {
+      display: block;
+    }
+  }
+}
+
+.navMenu {
+  @include flex_box_custom(flex-start, center, 28px);
+  font-size: 14px;
+  font-weight: 500;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $text_dark;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $secondary_color;
+    }
+
+    &.active {
+      color: $secondary_color;
+      font-weight: 600;
+      border-bottom: 2px solid $secondary_color;
+    }
+  }
+
+  .dropdownGroup {
+    position: relative;
+
+    .dropdownTrigger {
+      @include flex_box_custom(center, center, 4px);
+      padding: 4px 0;
+
+      .chevron {
+        width: 14px;
+        height: 14px;
+        color: #a8a29e;
+        transition: transform 0.2s ease;
+      }
+
+      &:hover .chevron {
+        transform: rotate(180deg);
+      }
+    }
+
+    .dropdownMenu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 8px;
+      width: 208px;
+      background-color: $white_color;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      border: 1px solid $border_color;
+      padding: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s ease;
+      z-index: 50;
+
+      .dropdownItem {
+        width: 100%;
+        text-align: left;
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: 500;
+        border-radius: 8px;
+        color: $text_dark;
+
+        &:hover {
+          background-color: #fffbeb;
+          color: #d97706;
+        }
+      }
+    }
+
+    &:hover .dropdownMenu {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+}
+
+.logo {
+  @include flex_box_custom(center, center, 0px);
+  flex-direction: column;
+  cursor: pointer;
+
+  .logoText {
+    font-size: 22px;
+    font-weight: 700;
+    color: $primary_color;
+    line-height: 1;
+  }
+
+  .logoSub {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: $secondary_color;
+    font-weight: 600;
+  }
+}
+
+.actions {
+  @include flex_box_custom(flex-end, center, 12px);
+
+  .iconBtn {
+    position: relative;
+    padding: 8px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: $text_dark;
+    @include flex_box_custom(center, center, 0);
+
+    &:hover {
+      background-color: #f5f5f4;
+      color: $secondary_color;
+    }
+
+    &.hideMobile {
+      @media (max-width: 640px) {
+        display: none;
+      }
+    }
+
+    .badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 16px;
+      height: 16px;
+      background-color: $primary_color;
+      color: $white_color;
+      font-size: 10px;
+      font-weight: 700;
+      border-radius: 50%;
+      @include flex_box_custom(center, center, 0);
+
+      &.roseBadge {
+        background-color: #f43f5e;
+      }
+    }
+  }
+
+  .cartBtn {
+    @include flex_box_custom(center, center, 8px);
+    background-color: $primary_color;
+    color: $white_color;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: $secondary_color;
+      color: $primary_color;
+    }
+
+    .cartBadge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 16px;
+      height: 16px;
+      background-color: $secondary_color;
+      color: $primary_color;
+      font-size: 10px;
+      font-weight: 700;
+      border-radius: 50%;
+      @include flex_box_custom(center, center, 0);
+    }
+
+    .cartAmount {
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+  }
+}

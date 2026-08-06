@@ -1,0 +1,52 @@
+@use '@styles/_variable.module.scss' as *;
+@use '@styles/_mixin.module.scss' as *;
+
+.containerCard {
+  @include flex_box_custom(center, center, 18px);
+  width: 280px;
+  height: 104px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 12px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .iconBox {
+    @include flex_box_custom(center, center, 0px);
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: rgba(245, 158, 11, 0.2);
+    color: $secondary_color;
+    flex-shrink: 0;
+
+    .imgIcon {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+  }
+}
+
+.containerContent {
+  @include flex_box_custom(center, flex-start, 4px);
+  flex-direction: column;
+  color: $white_color;
+  font-weight: 300;
+
+  .title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .des {
+    font-size: 13px;
+    color: #ffffffc7;
+    line-height: 1.3;
+  }
+}

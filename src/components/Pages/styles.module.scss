@@ -1,0 +1,768 @@
+@use '@styles/_variable.module.scss' as *;
+@use '@styles/_mixin.module.scss' as *;
+
+.pageWrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 16px;
+
+  @media (min-width: 640px) {
+    padding: 40px 32px;
+  }
+}
+
+/* About Us Styles */
+.aboutHeader {
+  text-align: center;
+  max-width: 768px;
+  margin: 0 auto 64px auto;
+
+  .journeyTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 14px;
+    border-radius: 9999px;
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #d97706;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+  }
+
+  .aboutTitle {
+    font-size: 32px;
+    font-weight: 700;
+    color: $primary_color;
+    margin-bottom: 16px;
+
+    @media (min-width: 640px) {
+      font-size: 44px;
+    }
+  }
+
+  .aboutDesc {
+    font-size: 14px;
+    color: #57534e;
+    line-height: 1.7;
+
+    @media (min-width: 640px) {
+      font-size: 16px;
+    }
+  }
+}
+
+.aboutGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 32px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .aboutCard {
+    padding: 32px;
+    border-radius: 20px;
+    background-color: $white_color;
+    border: 1px solid $border_color;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    text-align: center;
+
+    .iconBox {
+      width: 56px;
+      height: 56px;
+      background-color: rgba(245, 158, 11, 0.1);
+      color: #d97706;
+      border-radius: 16px;
+      @include flex_box_custom(center, center, 0px);
+      margin: 0 auto 16px auto;
+    }
+
+    .cardTitle {
+      font-size: 18px;
+      font-weight: 700;
+      color: $primary_color;
+      margin-bottom: 8px;
+    }
+
+    .cardDesc {
+      font-size: 12px;
+      color: #78716c;
+      line-height: 1.6;
+    }
+  }
+}
+
+/* Contact Us Styles */
+.contactGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 40px;
+  margin-top: 32px;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .infoCol {
+    grid-column: span 5;
+    background-color: $primary_color;
+    color: $white_color;
+    padding: 32px;
+    border-radius: 24px;
+    @include flex_box_custom(space-between, stretch, 24px);
+    flex-direction: column;
+
+    @media (max-width: 1024px) {
+      grid-column: span 1;
+    }
+
+    .infoTitle {
+      font-size: 20px;
+      font-weight: 700;
+      color: $secondary_color;
+      margin-bottom: 24px;
+    }
+
+    .infoList {
+      @include flex_box_custom(flex-start, stretch, 16px);
+      flex-direction: column;
+      font-size: 12px;
+
+      .infoItem {
+        @include flex_box_custom(flex-start, flex-start, 12px);
+
+        .infoIcon {
+          color: $secondary_color;
+          flex-shrink: 0;
+        }
+
+        .infoLabel {
+          font-weight: 700;
+          color: #e7e5e4;
+          display: block;
+        }
+
+        .infoVal {
+          color: #a8a29e;
+        }
+      }
+    }
+
+    .infoBanner {
+      padding: 16px;
+      border-radius: 12px;
+      background-color: #292524;
+      font-size: 12px;
+      color: #d6d3d1;
+    }
+  }
+
+  .formCol {
+    grid-column: span 7;
+    background-color: $white_color;
+    padding: 32px;
+    border-radius: 24px;
+    border: 1px solid $border_color;
+
+    @media (max-width: 1024px) {
+      grid-column: span 1;
+    }
+
+    .formTitle {
+      font-size: 18px;
+      font-weight: 700;
+      color: $primary_color;
+      margin-bottom: 16px;
+    }
+
+    .formGrid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 16px;
+      font-size: 12px;
+
+      @media (min-width: 640px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .fullWidth {
+        grid-column: span 1;
+
+        @media (min-width: 640px) {
+          grid-column: span 2;
+        }
+      }
+
+      .field {
+        label {
+          display: block;
+          color: #57534e;
+          font-weight: 600;
+          margin-bottom: 4px;
+        }
+
+        input, textarea {
+          width: 100%;
+          background-color: #fafaf9;
+          border: 1px solid $border_color;
+          border-radius: 12px;
+          padding: 10px 12px;
+
+          &:focus {
+            border-color: $secondary_color;
+            outline: none;
+          }
+        }
+      }
+    }
+
+    .submitBtn {
+      width: 100%;
+      background-color: $secondary_color;
+      color: $primary_color;
+      font-weight: 700;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      margin-top: 16px;
+      @include flex_box_custom(center, center, 8px);
+      font-size: 12px;
+
+      &:hover {
+        background-color: #fbbf24;
+      }
+    }
+  }
+}
+
+/* Account Page Styles */
+.userHeaderCard {
+  background-color: $white_color;
+  border: 1px solid $border_color;
+  border-radius: 24px;
+  padding: 24px;
+  @include flex_box_custom(space-between, center, 24px);
+  margin-bottom: 32px;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: $secondary_color;
+    color: $primary_color;
+    font-size: 24px;
+    font-weight: 700;
+    @include flex_box_custom(center, center, 0px);
+    border: 4px solid #fef3c7;
+    flex-shrink: 0;
+  }
+
+  .userInfo {
+    flex: 1;
+
+    .userName {
+      font-size: 20px;
+      font-weight: 700;
+      color: $primary_color;
+    }
+
+    .userMetaRow {
+      @include flex_box_custom(flex-start, center, 16px);
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: #78716c;
+      margin-top: 4px;
+
+      @media (max-width: 640px) {
+        justify-content: center;
+      }
+
+      .metaItem {
+        @include flex_box_custom(flex-start, center, 4px);
+
+        .icon {
+          color: $secondary_color;
+        }
+      }
+    }
+  }
+
+  .vipBadge {
+    padding: 8px 16px;
+    border-radius: 12px;
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #d97706;
+    font-weight: 700;
+    font-size: 12px;
+    border: 1px solid rgba(245, 158, 11, 0.2);
+  }
+}
+
+.accountMainCard {
+  background-color: $white_color;
+  border: 1px solid $border_color;
+  border-radius: 24px;
+  padding: 24px;
+
+  .tabsHeader {
+    @include flex_box_custom(flex-start, center, 16px);
+    border-bottom: 1px solid $border_color;
+    padding-bottom: 16px;
+
+    .tabBtn {
+      @include flex_box_custom(flex-start, center, 8px);
+      font-weight: 700;
+      font-size: 13px;
+      padding-bottom: 8px;
+      border: none;
+      background: transparent;
+      border-bottom: 2px solid transparent;
+      color: #a8a29e;
+      cursor: pointer;
+
+      &.active {
+        border-bottom-color: $secondary_color;
+        color: #d97706;
+      }
+    }
+  }
+
+  .tabContent {
+    padding-top: 24px;
+
+    .orderCard {
+      padding: 20px;
+      border-radius: 16px;
+      background-color: #fafaf9;
+      border: 1px solid $border_color;
+      margin-bottom: 16px;
+      font-size: 12px;
+
+      .orderHead {
+        @include flex_box_custom(space-between, center, 8px);
+        padding-bottom: 12px;
+        border-bottom: 1px solid $border_color;
+        margin-bottom: 12px;
+
+        .orderId {
+          font-family: monospace;
+          font-weight: 700;
+          color: $secondary_color;
+          font-size: 14px;
+        }
+
+        .orderDate {
+          color: #a8a29e;
+          margin-left: 12px;
+        }
+
+        .statusBadge {
+          padding: 2px 10px;
+          border-radius: 9999px;
+          background-color: #fef3c7;
+          color: #92400e;
+          font-weight: 700;
+          font-size: 10px;
+        }
+      }
+
+      .orderItems {
+        @include flex_box_custom(flex-start, stretch, 8px);
+        flex-direction: column;
+        margin-bottom: 12px;
+
+        .itemRow {
+          @include flex_box_custom(space-between, center, 0px);
+
+          .name {
+            color: #292524;
+            font-weight: 500;
+          }
+
+          .price {
+            font-weight: 700;
+            color: $primary_color;
+          }
+        }
+      }
+
+      .orderFoot {
+        padding-top: 8px;
+        border-top: 1px solid $border_color;
+        @include flex_box_custom(space-between, center, 0px);
+
+        .total {
+          font-size: 14px;
+          font-weight: 800;
+          color: $secondary_color;
+        }
+      }
+    }
+
+    .wishGrid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 16px;
+
+      @media (min-width: 640px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      @media (min-width: 1024px) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .wishCard {
+        padding: 12px;
+        border-radius: 16px;
+        background-color: #fafaf9;
+        border: 1px solid $border_color;
+        cursor: pointer;
+
+        &:hover {
+          border-color: $secondary_color;
+        }
+
+        .wishImg {
+          width: 100%;
+          aspect-ratio: 1;
+          object-fit: cover;
+          border-radius: 12px;
+          margin-bottom: 8px;
+        }
+
+        .wishTitle {
+          font-weight: 700;
+          font-size: 12px;
+          color: $primary_color;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .wishPrice {
+          font-size: 12px;
+          font-weight: 800;
+          color: $secondary_color;
+          margin-top: 4px;
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+/* Product Detail Page Styles */
+.detailGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 40px;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .galleryCol {
+    grid-column: span 6;
+
+    @media (max-width: 1024px) {
+      grid-column: span 1;
+    }
+
+    .mainImgBox {
+      aspect-ratio: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      background-color: #f5f5f4;
+      border: 1px solid $border_color;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .thumbRow {
+      @include flex_box_custom(flex-start, center, 12px);
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-top: 16px;
+
+      .thumbBtn {
+        width: 80px;
+        height: 80px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 2px solid $border_color;
+        background: transparent;
+        cursor: pointer;
+        flex-shrink: 0;
+
+        &.active {
+          border-color: $secondary_color;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  .infoCol {
+    grid-column: span 6;
+    @include flex_box_custom(space-between, stretch, 24px);
+    flex-direction: column;
+
+    @media (max-width: 1024px) {
+      grid-column: span 1;
+    }
+
+    .catRow {
+      @include flex_box_custom(space-between, center, 0px);
+      font-size: 12px;
+      margin-bottom: 12px;
+
+      .catName {
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: $secondary_color;
+      }
+
+      .ratingBox {
+        @include flex_box_custom(flex-start, center, 6px);
+        color: #f59e0b;
+        font-weight: 700;
+      }
+    }
+
+    .detailTitle {
+      font-size: 28px;
+      font-weight: 700;
+      color: $primary_color;
+      margin-bottom: 12px;
+    }
+
+    .priceRow {
+      @include flex_box_custom(flex-start, baseline, 16px);
+      margin-bottom: 24px;
+
+      .currentPrice {
+        font-size: 28px;
+        font-weight: 800;
+        color: $primary_color;
+      }
+
+      .oldPrice {
+        font-size: 16px;
+        color: #a8a29e;
+        text-decoration: line-through;
+      }
+    }
+
+    .descText {
+      font-size: 14px;
+      color: #57534e;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .optSection {
+      margin-bottom: 20px;
+
+      .optLabel {
+        font-size: 12px;
+        font-weight: 600;
+        color: #44403c;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .colorGroup {
+        @include flex_box_custom(flex-start, center, 12px);
+
+        .colorBtn {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          border: 2px solid #d6d3d1;
+          cursor: pointer;
+          @include flex_box_custom(center, center, 0px);
+
+          &.active {
+            border-color: $secondary_color;
+            transform: scale(1.1);
+          }
+        }
+      }
+
+      .sizeGroup {
+        @include flex_box_custom(flex-start, center, 10px);
+
+        .sizeBtn {
+          padding: 8px 16px;
+          border-radius: 12px;
+          font-size: 12px;
+          font-weight: 700;
+          border: 1px solid $border_color;
+          background-color: #fafaf9;
+          color: #44403c;
+          cursor: pointer;
+
+          &.active {
+            background-color: $secondary_color;
+            color: $primary_color;
+            border-color: $secondary_color;
+          }
+        }
+      }
+    }
+
+    .qtyRow {
+      @include flex_box_custom(flex-start, center, 16px);
+      margin-bottom: 32px;
+
+      .qtyBox {
+        @include flex_box_custom(center, center, 0px);
+        border: 1px solid $border_color;
+        border-radius: 12px;
+        background-color: #fafaf9;
+
+        .qtyBtn {
+          padding: 10px;
+          border: none;
+          background: transparent;
+          color: #57534e;
+          cursor: pointer;
+
+          &:hover {
+            color: $secondary_color;
+          }
+        }
+
+        .qtyNum {
+          padding: 0 16px;
+          font-size: 14px;
+          font-weight: 700;
+          color: $primary_color;
+        }
+      }
+    }
+
+    .actionSection {
+      padding-top: 16px;
+      border-top: 1px solid $border_color;
+
+      .btnGrid {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 12px;
+
+        @media (min-width: 640px) {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .cartBtn {
+          background-color: $primary_color;
+          color: $white_color;
+          padding: 14px;
+          border-radius: 12px;
+          font-size: 12px;
+          font-weight: 700;
+          border: none;
+          cursor: pointer;
+          @include flex_box_custom(center, center, 8px);
+
+          &:hover {
+            background-color: $secondary_color;
+            color: $primary_color;
+          }
+        }
+
+        .buyBtn {
+          background-color: $secondary_color;
+          color: $primary_color;
+          padding: 14px;
+          border-radius: 12px;
+          font-size: 12px;
+          font-weight: 700;
+          border: none;
+          cursor: pointer;
+          @include flex_box_custom(center, center, 8px);
+
+          &:hover {
+            background-color: #fbbf24;
+          }
+        }
+      }
+
+      .wishBtn {
+        @include flex_box_custom(center, center, 8px);
+        font-size: 12px;
+        font-weight: 600;
+        color: #57534e;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        padding: 8px;
+        width: 100%;
+        margin-top: 12px;
+
+        &:hover {
+          color: #f43f5e;
+        }
+      }
+    }
+  }
+}
+
+.detailsTabCard {
+  background-color: $white_color;
+  border-radius: 16px;
+  border: 1px solid $border_color;
+  padding: 24px;
+  margin-top: 48px;
+
+  .tabsBar {
+    @include flex_box_custom(flex-start, center, 24px);
+    border-bottom: 1px solid $border_color;
+    padding-bottom: 16px;
+
+    .tabBtn {
+      font-weight: 700;
+      font-size: 14px;
+      padding-bottom: 8px;
+      border: none;
+      background: transparent;
+      border-bottom: 2px solid transparent;
+      color: #a8a29e;
+      cursor: pointer;
+
+      &.active {
+        border-bottom-color: $secondary_color;
+        color: #d97706;
+      }
+    }
+  }
+
+  .tabBody {
+    padding-top: 24px;
+    font-size: 13px;
+    color: #57534e;
+    line-height: 1.6;
+  }
+}
