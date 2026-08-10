@@ -1,59 +1,34 @@
-import React from 'react';
-import { StoreProvider, useStore } from '@context/StoreContext';
-import Header from '@components/Header/Header';
-import HeroBanner from '@components/Hero/HeroBanner';
-import InfoBar from '@components/InfoBar/InfoBar';
-import FlashSaleBanner from '@components/Shop/FlashSaleBanner';
-import ProductGrid from '@components/Shop/ProductGrid';
+import React, { Suspense } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import routers from '@routers/routers';
+import { StoreProvider } from '@context/StoreContext';
 import QuickViewModal from '@components/Shop/QuickViewModal';
 import CartDrawer from '@components/Cart/CartDrawer';
 import WishlistDrawer from '@components/Wishlist/WishlistDrawer';
 import CompareModal from '@components/Compare/CompareModal';
 import SearchModal from '@components/Search/SearchModal';
 import CheckoutModal from '@components/Checkout/CheckoutModal';
-import OrderSuccessPage from '@components/Checkout/OrderSuccessPage';
-import ProductDetailPage from '@components/Pages/ProductDetailPage';
-import AboutUs from '@components/Pages/AboutUs';
-import ContactUs from '@components/Pages/ContactUs';
-import AccountPage from '@components/Pages/AccountPage';
-import Footer from '@components/Footer/Footer';
 import ToastContainer from '@components/Toast/ToastContainer';
 
-function MainLayout() {
-  const { activeView } = useStore();
-
+function AppRoutes() {
   return (
-    <div className="min-h-screen bg-stone-50 text-stone-900 font-sans flex flex-col justify-between selection:bg-amber-500 selection:text-stone-950">
-      <div>
-        <Header />
+    <BrowserRouter>
+      <Suspense fallback={<div className="flex items-center justify-center min-h-screen text-stone-500 font-medium">Loading...</div>}>
+        <Routes>
+          {routers.map((item, index) => {
+            const Component = item.component;
+            return (
+              <Route
+                path={item.path}
+                element={<Component />}
+                key={index}
+              />
+            );
+          })}
+        </Routes>
+      </Suspense>
 
-        <main>
-          {activeView === 'home' && (
-            <>
-              <HeroBanner />
-              <InfoBar />
-              <FlashSaleBanner />
-              <ProductGrid />
-            </>
-          )}
-
-          {activeView === 'shop' && <ProductGrid />}
-
-          {activeView === 'product-detail' && <ProductDetailPage />}
-
-          {activeView === 'about' && <AboutUs />}
-
-          {activeView === 'contact' && <ContactUs />}
-
-          {activeView === 'account' && <AccountPage />}
-
-          {activeView === 'checkout-success' && <OrderSuccessPage />}
-        </main>
-      </div>
-
-      <Footer />
-
-      {/* Overlays & Drawers */}
+      {/* Global Modals & Drawers */}
       <CartDrawer />
       <WishlistDrawer />
       <CompareModal />
@@ -61,14 +36,14 @@ function MainLayout() {
       <SearchModal />
       <CheckoutModal />
       <ToastContainer />
-    </div>
+    </BrowserRouter>
   );
 }
 
 export default function App() {
   return (
     <StoreProvider>
-      <MainLayout />
+      <AppRoutes />
     </StoreProvider>
   );
 }

@@ -1,9 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useStore } from '@context/StoreContext';
 import { Eye, Heart, ShoppingBag, GitCompare, Star } from 'lucide-react';
 import styles from './styles.module.scss';
 
 function ProductCard({ product }) {
+  const navigate = useNavigate();
   const {
     t,
     language,
@@ -14,8 +16,14 @@ function ProductCard({ product }) {
     toggleCompare,
     isInCompare,
     setSelectedQuickViewProduct,
-    openProductDetail
+    setSelectedProductDetail
   } = useStore();
+
+  const handleProductClick = () => {
+    setSelectedProductDetail(product);
+    navigate(`/product/${product.id}`);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const title = language === 'EN' && product.titleEn ? product.titleEn : product.title;
   const isWishlisted = isInWishlist(product.id);
@@ -27,7 +35,7 @@ function ProductCard({ product }) {
         <img
           src={product.image}
           alt={title}
-          onClick={() => openProductDetail(product)}
+          onClick={handleProductClick}
           loading="lazy"
         />
 
@@ -110,7 +118,7 @@ function ProductCard({ product }) {
           </div>
         </div>
 
-        <h3 onClick={() => openProductDetail(product)} className={styles.cardTitle}>
+        <h3 onClick={handleProductClick} className={styles.cardTitle}>
           {title}
         </h3>
 

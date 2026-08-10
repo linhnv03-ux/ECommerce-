@@ -1,0 +1,62 @@
+@use '@styles/_variable.module.scss' as *;
+@use '@styles/_mixin.module.scss' as *;
+
+.wrapper {
+  padding: 48px 16px 24px 16px;
+  background-color: transparent;
+  text-align: center;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  @include flex_box_custom(center, center, 12px);
+  flex-direction: column;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background-color: rgba(245, 158, 11, 0.15);
+  color: $secondary_color;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  color: $primary_color;
+
+  @media (min-width: 640px) {
+    font-size: 36px;
+  }
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #78716c;
+}
+
+.divider {
+  @include flex_box_custom(center, center, 12px);
+  width: 100%;
+  max-width: 240px;
+  margin-top: 8px;
+
+  .line {
+    flex: 1;
+    height: 1px;
+    background-color: $border_color;
+  }
+
+  .icon {
+    width: 16px;
+    height: 16px;
+    color: $secondary_color;
+  }
+}

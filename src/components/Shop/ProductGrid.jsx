@@ -1,7 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { useStore } from '@context/StoreContext';
 import ProductCard from './ProductCard';
-import { SlidersHorizontal, Grid, List, FilterX } from 'lucide-react';
+import CategoryTabs from './CategoryTabs';
+import ShopToolbar from './ShopToolbar';
+import FilterSidebar from './FilterSidebar';
+import NoProductsFound from './NoProductsFound';
 import styles from './styles.module.scss';
 
 function ProductGrid() {
@@ -57,6 +60,8 @@ function ProductGrid() {
     });
   }, [products, activeCategory, searchQuery, priceMaxVND, minRating, onlyInStock, sortBy]);
 
+  const hasActiveFilters = activeCategory !== 'all' || searchQuery || minRating > 0 || priceMaxVND < 6000000 || onlyInStock;
+
   const resetFilters = () => {
     setActiveCategory('all');
     setSearchQuery('');
@@ -68,157 +73,34 @@ function ProductGrid() {
 
   return (
     <section className={styles.gridSection}>
-      {/* Category Tabs Header */}
-      <div className={styles.categoryTabs}>
-        <div className={styles.tabsList}>
-          {categories.map((cat) => {
-            const isActive = activeCategory === cat.key;
-            return (
-              <button
-                key={cat.key}
-                onClick={() => setActiveCategory(cat.key)}
-                className={`${styles.tabBtn} ${isActive ? styles.tabActive : ''}`}
-              >
-                {cat.label}
-              </button>
-            );
-          })}
-        </div>
+      <CategoryTabs categories={categories} count={filteredProducts.length} />
 
-        <div className={styles.productCount}>
-          {filteredProducts.length} {t.featuredProducts.toLowerCase()}
-        </div>
-      </div>
-
-      {/* Toolbar */}
-      <div className={styles.toolbar}>
-        <div className={styles.toolLeft}>
-          <button
-            onClick={() => setShowFilterSidebar(!showFilterSidebar)}
-            className={`${styles.filterToggleBtn} ${showFilterSidebar ? styles.filterToggleActive : ''}`}
-          >
-            <SlidersHorizontal style={{ width: 16, height: 16 }} />
-            <span>{t.filterByPrice}</span>
-          </button>
-
-          {(activeCategory !== 'all' || searchQuery || minRating > 0 || priceMaxVND < 6000000 || onlyInStock) && (
-            <button
-              onClick={resetFilters}
-              className={styles.resetBtn}
-            >
-              <FilterX style={{ width: 14, height: 14 }} />
-              <span>Xóa bộ lọc</span>
-            </button>
-          )}
-        </div>
-
-        <div className={styles.toolRight}>
-          <div className={styles.sortBox}>
-            <span className={styles.sortLabel}>{t.sortBy}</span>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className={styles.sortSelect}
-            >
-              <option value="bestseller">{t.sortBestseller}</option>
-              <option value="newest">{t.sortNewest}</option>
-              <option value="price-asc">{t.sortPriceAsc}</option>
-              <option value="price-desc">{t.sortPriceDesc}</option>
-              <option value="rating">{t.sortRating}</option>
-            </select>
-          </div>
-
-          <div className={styles.layoutGroup}>
-            <button
-              onClick={() => setLayoutMode('grid')}
-              className={`${styles.layoutBtn} ${layoutMode === 'grid' ? styles.layoutActive : ''}`}
-            >
-              <Grid style={{ width: 16, height: 16 }} />
-            </button>
-            <button
-              onClick={() => setLayoutMode('list')}
-              className={`${styles.layoutBtn} ${layoutMode === 'list' ? styles.layoutActive : ''}`}
-            >
-              <List style={{ width: 16, height: 16 }} />
-            </button>
-          </div>
-        </div>
-      </div>
+      <ShopToolbar
+        showFilterSidebar={showFilterSidebar}
+        setShowFilterSidebar={setShowFilterSidebar}
+        hasActiveFilters={hasActiveFilters}
+        resetFilters={resetFilters}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        layoutMode={layoutMode}
+        setLayoutMode={setLayoutMode}
+      />
 
       <div className={styles.mainGridRow}>
         {showFilterSidebar && (
-          <aside className={styles.sidebarFilter}>
-            <h3 className={styles.filterTitle}>
-              Bộ Lọc Chi Tiết
-            </h3>
-
-            <div className={styles.filterBlock}>
-              <label className={styles.filterLabel}>
-                Giá tối đa: {priceMaxVND.toLocaleString()}₫
-              </label>
-              <input
-                type="range"
-                min={500000}
-                max={6000000}
-                step={200000}
-                value={priceMaxVND}
-                onChange={(e) => setPriceMaxVND(Number(e.target.value))}
-                className={styles.rangeInput}
-              />
-              <div className={styles.rangeValues}>
-                <span>500.000₫</span>
-                <span>6.000.000₫</span>
-              </div>
-            </div>
-
-            <div className={styles.filterBlock}>
-              <label className={styles.filterLabel}>
-                Đánh giá tối thiểu
-              </label>
-              <div className={styles.ratingGroup}>
-                {[4.5, 4.0, 3.5, 0].map((rate) => (
-                  <button
-                    key={rate}
-                    onClick={() => setMinRating(rate)}
-                    className={`${styles.ratingBtn} ${minRating === rate ? styles.ratingActive : ''}`}
-                  >
-                    {rate === 0 ? 'Tất cả' : `${rate}★`}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className={styles.stockRow}>
-              <span className={styles.stockLabel}>
-                {t.inStockOnly}
-              </span>
-              <input
-                type="checkbox"
-                checked={onlyInStock}
-                onChange={(e) => setOnlyInStock(e.target.checked)}
-                className={styles.checkbox}
-              />
-            </div>
-          </aside>
+          <FilterSidebar
+            priceMaxVND={priceMaxVND}
+            setPriceMaxVND={setPriceMaxVND}
+            minRating={minRating}
+            setMinRating={setMinRating}
+            onlyInStock={onlyInStock}
+            setOnlyInStock={setOnlyInStock}
+          />
         )}
 
         <div className={styles.contentArea}>
           {filteredProducts.length === 0 ? (
-            <div className={styles.noProductsBox}>
-              <FilterX className={styles.noProductsIcon} />
-              <h3 className={styles.noProductsTitle}>
-                Không tìm thấy sản phẩm phù hợp
-              </h3>
-              <p className={styles.noProductsDesc}>
-                Thử thay đổi từ khóa tìm kiếm hoặc bỏ bớt các bộ lọc.
-              </p>
-              <button
-                onClick={resetFilters}
-                className={styles.resetBigBtn}
-              >
-                Đặt lại bộ lọc
-              </button>
-            </div>
+            <NoProductsFound resetFilters={resetFilters} />
           ) : (
             <div
               className={
